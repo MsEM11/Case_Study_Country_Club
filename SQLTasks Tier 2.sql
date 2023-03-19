@@ -39,7 +39,9 @@ FROM Facilities
 WHERE membercost > 0;
 
 /* Q2: How many facilities do not charge a fee to members? */
-
+SELECT COUNT(*)
+FROM Facilities
+WHERE membercost = 0;
 
 /* Q3: Write an SQL query to show a list of facilities that charge a fee to members,
 where the fee is less than 20% of the facility's monthly maintenance cost.

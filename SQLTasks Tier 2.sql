@@ -62,6 +62,12 @@ WHERE facid IN (1, 5);
 'cheap' or 'expensive', depending on if their monthly maintenance cost is
 more than $100. Return the name and monthly maintenance of the facilities
 in question. */
+SELECT name, monthlymaintenance, 
+CASE 
+	WHEN monthlymaintenance <= 100 THEN 'cheap'
+    ELSE 'expensive'
+    END AS price_cat
+FROM Facilities;
 
 
 /* Q6: You'd like to get the first and last name of the last member(s)

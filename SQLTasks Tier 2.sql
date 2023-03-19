@@ -52,6 +52,8 @@ FROM Facilities
 WHERE membercost > 0 
 AND membercost < 0.2 * monthlymaintenance;
 
+-- Note: This is ALL facilities, since membercost is generally very cheap
+
 /* Q4: Write an SQL query to retrieve the details of facilities with ID 1 and 5.
 Try writing the query without using the OR operator. */
 SELECT * 

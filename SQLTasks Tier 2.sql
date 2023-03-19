@@ -89,6 +89,7 @@ USING (memid)
 INNER JOIN Facilities
 USING (facid)
 WHERE Facilities.name LIKE "Tennis Court%"
+AND memid > 0
 ORDER BY fullname;
 
 

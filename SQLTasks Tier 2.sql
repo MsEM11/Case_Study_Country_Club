@@ -82,6 +82,14 @@ WHERE joindate IN
 Include in your output the name of the court, and the name of the member
 formatted as a single column. Ensure no duplicate data, and order by
 the member name. */
+SELECT DISTINCT CONCAT (firstname," ", surname) AS fullname, Facilities.name
+FROM Members
+INNER JOIN Bookings
+USING (memid)
+INNER JOIN Facilities
+USING (facid)
+WHERE Facilities.name LIKE "Tennis Court%"
+ORDER BY fullname;
 
 
 /* Q8: Produce a list of bookings on the day of 2012-09-14 which

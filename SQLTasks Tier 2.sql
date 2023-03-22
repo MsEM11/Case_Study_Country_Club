@@ -118,7 +118,21 @@ ORDER BY booking_cost DESC;
 
 
 /* Q9: This time, produce the same result as in Q8, but using a subquery. */
-
+SELECT name AS facility, CONCAT(firstname, " ", surname) AS member, booking_cost
+FROM 
+	(SELECT name, firstname, surname, 
+     CASE 
+     	WHEN memid = 0 THEN slots * guestcost
+    	ELSE slots * membercost
+		END AS booking_cost
+     FROM Members
+     JOIN Bookings
+     USING (memid)
+     JOIN Facilities
+     USING (facid)
+    WHERE DATE(starttime) = '2012-09-14') as x
+WHERE booking_cost > 30
+ORDER BY booking_cost DESC;
 
 /* PART 2: SQLite
 

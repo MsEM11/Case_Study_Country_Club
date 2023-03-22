@@ -52,7 +52,7 @@ FROM Facilities
 WHERE membercost > 0 
 AND membercost < 0.2 * monthlymaintenance;
 
--- Note: This is ALL facilities, since membercost is generally very cheap
+-- Note: This includes ALL facilities, since member cost is generally very cheap
 
 /* Q4: Write an SQL query to retrieve the details of facilities with ID 1 and 5.
 Try writing the query without using the OR operator. */
@@ -101,6 +101,20 @@ different costs to members (the listed costs are per half-hour 'slot'), and
 the guest user's ID is always 0. Include in your output the name of the
 facility, the name of the member formatted as a single column, and the cost.
 Order by descending cost, and do not use any subqueries. */
+SELECT f.name AS facility, CONCAT(firstname, " ", surname) AS member, 
+CASE
+	WHEN memid = 0 THEN slots * guestcost
+    ELSE slots * membercost
+	END AS booking_cost
+FROM Bookings AS b 
+JOIN Facilities AS f 
+USING (facid)
+JOIN Members AS m
+USING (memid)
+WHERE date(starttime) = '2012-09-14'
+AND ((memid = 0 AND slots * guestcost > 30)
+     OR (memid > 0 AND slots * membercost > 30))
+ORDER BY booking_cost DESC;
 
 
 /* Q9: This time, produce the same result as in Q8, but using a subquery. */

@@ -143,7 +143,19 @@ QUESTIONS:
 /* Q10: Produce a list of facilities with a total revenue less than 1000.
 The output of facility name and total revenue, sorted by revenue. Remember
 that there's a different cost for guests and members! */
-
+SELECT name, SUM(revenue) AS total_revenue
+FROM 
+    (SELECT name, 
+    CASE 
+        WHEN memid = 0 THEN guestcost * slots
+        ELSE membercost * slots
+        END AS revenue
+    FROM Bookings as b
+    JOIN Facilities as f
+    USING (facid)) AS x
+GROUP BY name
+HAVING total_revenue < 1000
+ORDER BY total_revenue;
 /* Q11: Produce a report of members and who recommended them in alphabetic surname,firstname order */
 
 

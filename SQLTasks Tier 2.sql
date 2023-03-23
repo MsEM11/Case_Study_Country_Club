@@ -157,7 +157,12 @@ GROUP BY name
 HAVING total_revenue < 1000
 ORDER BY total_revenue;
 /* Q11: Produce a report of members and who recommended them in alphabetic surname,firstname order */
-
+SELECT m1.surname || ', '|| m1.firstname AS member_name, m2.surname || ', ' || m2.firstname AS recommender_name
+FROM Members as m1
+RIGHT JOIN Members as m2
+ON m1.recommendedby = m2.memid
+WHERE m1.recommendedby IS NOT NULL
+ORDER BY member_name
 
 /* Q12: Find the facilities with their usage by member, but not guests */
 

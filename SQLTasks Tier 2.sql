@@ -165,7 +165,12 @@ WHERE m1.recommendedby IS NOT NULL
 ORDER BY member_name
 
 /* Q12: Find the facilities with their usage by member, but not guests */
-
+SELECT name, COUNT(*) AS member_usage 
+FROM Bookings
+JOIN Facilities
+USING(facid)
+WHERE memid > 0
+GROUP BY name
 
 /* Q13: Find the facilities usage by month, but not guests */
 
